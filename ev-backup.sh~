@@ -38,6 +38,5 @@ rm -rf $bak_folder
 #Start Alfresco
 $alfresco_dir/alfresco.sh start
 
-#Copy backup to google cloud bucket
-gsutil cp /opt/backup/ev_bak_$timestamp.zip gs://ev-live-backup/
+#Copy backup to 
 
