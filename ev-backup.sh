@@ -27,6 +27,9 @@ $alfresco_dir/postgresql/scripts/ctl.sh stop
 #Copy Alfresco Install Folder to Backup Location:
 cp -R $alfresco_dir/alf_data/ $bak_folder
 
+#Start Alfresco
+$alfresco_dir/alfresco.sh start
+
 #zip the backup
 cd $bak_folder
 zip -r ../ev_bak_$timestamp.zip . 
@@ -35,8 +38,7 @@ cd ..
 #delete the expanded folder
 rm -rf $bak_folder
 
-#Start Alfresco
-$alfresco_dir/alfresco.sh start
+
 
 #Copy backup to google cloud bucket
 gsutil cp /opt/backup/ev_bak_$timestamp.zip gs://ev-live-backup/
