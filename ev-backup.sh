@@ -26,6 +26,7 @@ $alfresco_dir/postgresql/scripts/ctl.sh stop
 
 #Copy Alfresco Install Folder to Backup Location:
 cp -R $alfresco_dir/alf_data/ $bak_folder
+#consider using: rsync -a -v src dst -- this copies everything except files with no changes
 
 #Start Alfresco
 $alfresco_dir/alfresco.sh start
