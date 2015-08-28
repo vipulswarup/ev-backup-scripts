@@ -39,15 +39,5 @@ rsync -a -v $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies ever
 #$alfresco_dir/alfresco.sh start &
 
 #zip the backup
-#cd $bak_folder
-#zip -r ../ev_bak_$timestamp.zip . 
 tar -cvf /opt/backup/ev_bak_$timestamp.tar $bak_folder
 pigz --best /opt/backup/ev_bak_$timestamp.tar
-#cd ..
-
-#delete the expanded folder
-#rm -rf $bak_folder
-
-#Copy backup to google cloud bucket
-gsutil cp /opt/backup/ev_bak_$timestamp.tar.gz gs://ev-live-backup/
-
