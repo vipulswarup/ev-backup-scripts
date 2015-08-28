@@ -41,3 +41,7 @@ rsync -a -v $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies ever
 #zip the backup
 tar -cvf /opt/backup/ev_bak_$timestamp.tar $bak_folder
 pigz --best /opt/backup/ev_bak_$timestamp.tar
+
+#write name of created file in a txt file for uploader script to pick up
+echo "/opt/backup/ev_bak_$timestamp.tar.gz" > /opt/backup/bakfile.txt
+
