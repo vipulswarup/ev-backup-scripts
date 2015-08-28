@@ -49,5 +49,5 @@ pigz --best /opt/backup/ev_bak_$timestamp.tar
 #rm -rf $bak_folder
 
 #Copy backup to google cloud bucket
-gsutil cp /opt/backup/ev_bak_$timestamp.gz gs://ev-live-backup/
+gsutil cp /opt/backup/ev_bak_$timestamp.tar.gz gs://ev-live-backup/
 
