@@ -6,6 +6,9 @@ if [ x$alfresco_dir = x"" ]; then
 fi
 echo "Using alfresco directory: $alfresco_dir"
 
+#check for pigz - multi threaded zip utility
+apt-get install pigz
+
 #stop Alfresco
 #$alfresco_dir/alfresco.sh stop
 
@@ -36,13 +39,15 @@ rsync -a -v $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies ever
 #$alfresco_dir/alfresco.sh start &
 
 #zip the backup
-cd $bak_folder
-zip -r ../ev_bak_$timestamp.zip . 
-cd ..
+#cd $bak_folder
+#zip -r ../ev_bak_$timestamp.zip . 
+tar -cvf /opt/backup/ev_bak_$timestamp.tar $bak_folder
+pigz --best /opt/backup/ev_bak_$timestamp.tar
+#cd ..
 
 #delete the expanded folder
 #rm -rf $bak_folder
 
 #Copy backup to google cloud bucket
-gsutil cp /opt/backup/ev_bak_$timestamp.zip gs://ev-live-backup/
+gsutil cp /opt/backup/ev_bak_$timestamp.gz gs://ev-live-backup/
 
