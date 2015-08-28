@@ -22,7 +22,7 @@ mkdir /opt/backup
 mkdir $bak_folder
 
 #Dump Alfresco DB to SQL File:
-$alfresco_dir/postgresql/bin/pg_dump alfresco > $bak_folder/alfresco-backup.sql
+$alfresco_dir/postgresql/bin/pg_dump alfresco --no-password > $bak_folder/alfresco-backup.sql
 
 #Stop PostgreSQL:
 #$alfresco_dir/postgresql/scripts/ctl.sh stop
