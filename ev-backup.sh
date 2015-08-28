@@ -7,10 +7,10 @@ fi
 echo "Using alfresco directory: $alfresco_dir"
 
 #stop Alfresco
-$alfresco_dir/alfresco.sh stop
+#$alfresco_dir/alfresco.sh stop
 
 #start postgre sql
-/opt/alfresco/postgresql/scripts/ctl.sh start
+#/opt/alfresco/postgresql/scripts/ctl.sh start
 
 #make backup directory with today's timestamp
 timestamp="$(date +"%Y-%m-%d_%H-%M-%S")"
@@ -22,14 +22,18 @@ mkdir $bak_folder
 $alfresco_dir/postgresql/bin/pg_dump alfresco > $bak_folder/alfresco-backup.sql
 
 #Stop PostgreSQL:
-$alfresco_dir/postgresql/scripts/ctl.sh stop
+#$alfresco_dir/postgresql/scripts/ctl.sh stop
 
 #Copy Alfresco Install Folder to Backup Location:
 #cp -R $alfresco_dir/alf_data/ $bak_folder
-rsync -a -v $alfresco_dir/alf_data/ $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v $alfresco_dir/alf_data/contentstore $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v $alfresco_dir/alf_data/contentstore.deleted $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v $alfresco_dir/alf_data/keystore $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v $alfresco_dir/alf_data/postgresql $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies everything except files with no changes
 
 #Start Alfresco
-$alfresco_dir/alfresco.sh start &
+#$alfresco_dir/alfresco.sh start &
 
 #zip the backup
 cd $bak_folder
