@@ -45,9 +45,9 @@ pigz --best /opt/backup/ev_bak_$timestamp.tar
 #delete previous backup
 #copy file name from /opt/backup/bakfile.txt
 old_bak_file_name=$(</opt/backup/bakfile.txt)
-echo "Deleting old backup file: $_old_bak_file_name"
+echo "Deleting old backup file: $old_bak_file_name"
 rm "$old_bak_file_name"
 
 #write name of created file in a txt file for uploader script to pick up
-echo "/opt/backup/ev_bak_$timestamp.tar.gz" > /opt/backup/bakfile.txt
+#echo "/opt/backup/ev_bak_$timestamp.tar.gz" > /opt/backup/bakfile.txt
 
