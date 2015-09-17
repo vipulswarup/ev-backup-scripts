@@ -29,11 +29,11 @@ $alfresco_dir/postgresql/bin/pg_dump alfresco --no-password > $bak_folder/alfres
 
 #Copy Alfresco Install Folder to Backup Location:
 #cp -R $alfresco_dir/alf_data/ $bak_folder
-rsync -a -v $alfresco_dir/alf_data/contentstore $bak_folder/ #-- this copies everything except files with no changes
-rsync -a -v $alfresco_dir/alf_data/contentstore.deleted $bak_folder/ #-- this copies everything except files with no changes
-rsync -a -v $alfresco_dir/alf_data/keystore $bak_folder/ #-- this copies everything except files with no changes
-rsync -a -v $alfresco_dir/alf_data/postgresql $bak_folder/ #-- this copies everything except files with no changes
-rsync -a -v $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v --delete-delay $alfresco_dir/alf_data/contentstore $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v ----delete-delay $alfresco_dir/alf_data/contentstore.deleted $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v --delete-delay $alfresco_dir/alf_data/keystore $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v --delete-delay $alfresco_dir/alf_data/postgresql $bak_folder/ #-- this copies everything except files with no changes
+rsync -a -v ----delete-delay $alfresco_dir/alf_data/solr4Backup $bak_folder/ #-- this copies everything except files with no changes
 
 #Start Alfresco
 #$alfresco_dir/alfresco.sh start &
