@@ -12,8 +12,8 @@ pigz --best /opt/backup/logs_$timestamp.tar
 #delete previous backup
 #copy file name from /opt/backup/log_bakfile.txt
 old_bak_file_name=$(</opt/backup/log_bakfile.txt)
-echo "Deleting old log backup file: $old_bak_file_name"
-rm "$old_bak_file_name"
+#echo "Deleting old log backup file: $old_bak_file_name"
+#rm "$old_bak_file_name"
 
 #write name of created file in a txt file for uploader script to pick up
 echo "/opt/backup/logs_$timestamp.tar.gz" > /opt/backup/log_bakfile.txt
