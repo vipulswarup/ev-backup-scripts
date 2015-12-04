@@ -17,9 +17,16 @@ my $midnight_friendly=ctime($midnight);
 print "Today's midnight was $midnight_friendly\n";
 print "Going to clean up Alfresco Log files \n";
 
-my $alf_dir="/opt/alfresco";
+my $num_args = $#ARGV + 1;
+if ($num_args != 1) {
+    print "\nUsage: cleanup-log-files.pl path_to_alfresco \n";
+    exit;
+}
+
+my $alf_dir=$ARGV[0];
+print "Cleaning logs under: ".$alf_dir."\n";
 my $tc_logs=$alf_dir."/tomcat/logs";
-my $log_bak_dir="/opt/backup/logs";
+my $log_bak_dir="/opt/backup/logs".$alf_dir;
 
 print "Alfresco Directory being used: ".$alf_dir."\n";
 print "Tomcat Log Directory being used: ".$tc_logs."\n";
@@ -29,6 +36,9 @@ if (not -d $log_bak_dir){
 	print "Creating directory: ".$log_bak_dir."\n";
 	mkdir $log_bak_dir;
 }
+
+#Delete any old log files from target directory
+system("rm $log_bak_dir/*");
 
 #Move all log files less than 1 month old (except for current files) to backup
 #Current files are those that have been modified today
